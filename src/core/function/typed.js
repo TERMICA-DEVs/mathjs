@@ -335,6 +335,16 @@ export const createTyped = /* #__PURE__ */ factory('typed', dependencies, functi
       convert: function (matrix) {
         return matrix.valueOf()
       }
+    }, {
+      from: 'Complex',
+      to: 'number',
+      convert: function (x) {
+        const n = Number(x.re)
+        if (isNaN(n)) {
+          throw new Error('Cannot convert "' + x + '" to a number')
+        }
+        return n
+      }
     }
   ]
 

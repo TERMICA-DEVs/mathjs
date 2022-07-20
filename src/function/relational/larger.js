@@ -71,7 +71,12 @@ export const createLarger = /* #__PURE__ */ factory(name, dependencies, ({ typed
       return x.compare(y) === 1
     },
 
-    'Complex, Complex': function () {
+    'Complex, Complex': function (x, y) {
+
+      if(x.im === 0 && y.im === 0) {
+        return x.re > y.re && !nearlyEqual(x.re, y.re, config.epsilon)
+      }
+
       throw new TypeError('No ordering relation is defined for complex numbers')
     },
 

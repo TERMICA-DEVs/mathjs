@@ -84,7 +84,14 @@ export const createCompare = /* #__PURE__ */ factory(name, dependencies, ({ type
       return new Fraction(x.compare(y))
     },
 
-    'Complex, Complex': function () {
+    'Complex, Complex': function (x, y) {
+
+      if(x.im === 0 && y.im === 0) {
+        return nearlyEqual(x.re, y.re, config.epsilon)
+          ? 0
+          : (x.re > y.re ? 1 : -1)
+      }
+
       throw new TypeError('No ordering relation is defined for complex numbers')
     },
 
